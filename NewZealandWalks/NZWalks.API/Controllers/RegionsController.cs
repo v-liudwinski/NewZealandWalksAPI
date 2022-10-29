@@ -25,7 +25,7 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> GetAllRegions()
         {
             var regions = await _regionRepository.GetAllAsync();
-            var regionsDTO = _mapper.Map<List<Models.DTO.Region>>(regions);
+            var regionsDTO = _mapper.Map<List<Models.DTO.RegionDTO>>(regions);
             
             return Ok(regionsDTO);
         }
@@ -39,7 +39,7 @@ namespace NZWalks.API.Controllers
 
             if (region is null) return NotFound();
 
-            var regionDTO = _mapper.Map<Models.DTO.Region>(region);
+            var regionDTO = _mapper.Map<Models.DTO.RegionDTO>(region);
             return Ok(regionDTO);
         }
 
@@ -58,7 +58,7 @@ namespace NZWalks.API.Controllers
 
             region = await _regionRepository.AddAsync(region);
 
-            var regionDTO = _mapper.Map<Models.DTO.Region>(region);
+            var regionDTO = _mapper.Map<Models.DTO.RegionDTO>(region);
             return CreatedAtAction(nameof(GetRegionAsync), new {Id = regionDTO.Id}, regionDTO);
         }
 
@@ -70,7 +70,7 @@ namespace NZWalks.API.Controllers
 
             if (region is null) return NotFound();
             
-            var regionDTO = _mapper.Map<Models.DTO.Region>(region);
+            var regionDTO = _mapper.Map<Models.DTO.RegionDTO>(region);
             
             return Ok(regionDTO);
         }
@@ -94,7 +94,7 @@ namespace NZWalks.API.Controllers
             
             if (region is null) return NotFound();
 
-            var regionDTO = _mapper.Map<Models.DTO.Region>(region);
+            var regionDTO = _mapper.Map<Models.DTO.RegionDTO>(region);
 
             return Ok(regionDTO);
         }

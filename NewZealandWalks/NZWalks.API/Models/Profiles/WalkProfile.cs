@@ -6,7 +6,7 @@ public class WalkProfile : Profile
 {
     public WalkProfile()
     {
-        CreateMap<Models.Domain.Walk, Models.DTO.Walk>()
+        CreateMap<Models.Domain.Walk, Models.DTO.WalkDTO>()
             .ReverseMap();
     }
 }
