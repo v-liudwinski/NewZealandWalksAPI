@@ -46,6 +46,12 @@ namespace NZWalks.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRegionAsync(Models.DTO.AddRegionRequest addRegionRequest)
         {
+            // Validation
+            if (!ValidateAddRegionAsync(addRegionRequest))
+            {
+                return BadRequest(ModelState);
+            }
+            
             var region = new Models.Domain.Region()
             {
                 Code = addRegionRequest.Code,
@@ -80,6 +86,12 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> UpdateRegionAsync([FromRoute] Guid id, 
             [FromBody] Models.DTO.UpdateRegionRequest updateRegionRequest)
         {
+            // Validation
+            if (!ValidateUpdateRegionAsync(updateRegionRequest))
+            {
+                return BadRequest(ModelState);
+            }
+            
             var region = new Models.Domain.Region()
             {
                 Code = updateRegionRequest.Code,
@@ -98,5 +110,79 @@ namespace NZWalks.API.Controllers
 
             return Ok(regionDTO);
         }
+
+        #region PrivateRegions
+
+        private bool ValidateAddRegionAsync(AddRegionRequest addRegionRequest)
+        {
+            if (addRegionRequest is null)
+            {
+                ModelState.AddModelError(nameof(addRegionRequest), 
+                    $"Region data is required!");
+            }
+
+            if (string.IsNullOrWhiteSpace(addRegionRequest.Code))
+            {
+                ModelState.AddModelError(nameof(addRegionRequest.Code), 
+                    $"{nameof(addRegionRequest.Code)} field could not be white space or empty!");
+            }
+            
+            if (string.IsNullOrWhiteSpace(addRegionRequest.Name))
+            {
+                ModelState.AddModelError(nameof(addRegionRequest.Name), 
+                    $"{nameof(addRegionRequest.Name)} field could not be white space or empty!");
+            }
+            
+            if (addRegionRequest.Area <= 0)
+            {
+                ModelState.AddModelError(nameof(addRegionRequest.Area), 
+                    $"{nameof(addRegionRequest.Area)} field could not be less than or equal to zero!");
+            }
+            
+            if (addRegionRequest.Population < 0)
+            {
+                ModelState.AddModelError(nameof(addRegionRequest.Population), 
+                    $"{nameof(addRegionRequest.Population)} field could not be less than zero!");
+            }
+
+            return ModelState.ErrorCount == 0;
+        }
+        
+        private bool ValidateUpdateRegionAsync(UpdateRegionRequest updateRegionRequest)
+        {
+            if (updateRegionRequest is null)
+            {
+                ModelState.AddModelError(nameof(updateRegionRequest), 
+                    $"Region data is required!");
+            }
+
+            if (string.IsNullOrWhiteSpace(updateRegionRequest.Code))
+            {
+                ModelState.AddModelError(nameof(updateRegionRequest.Code), 
+                    $"{nameof(updateRegionRequest.Code)} field could not be white space or empty!");
+            }
+            
+            if (string.IsNullOrWhiteSpace(updateRegionRequest.Name))
+            {
+                ModelState.AddModelError(nameof(updateRegionRequest.Name), 
+                    $"{nameof(updateRegionRequest.Name)} field could not be white space or empty!");
+            }
+            
+            if (updateRegionRequest.Area <= 0)
+            {
+                ModelState.AddModelError(nameof(updateRegionRequest.Area), 
+                    $"{nameof(updateRegionRequest.Area)} field could not be less than or equal to zero!");
+            }
+            
+            if (updateRegionRequest.Population < 0)
+            {
+                ModelState.AddModelError(nameof(updateRegionRequest.Population), 
+                    $"{nameof(updateRegionRequest.Population)} field could not be less than zero!");
+            }
+
+            return ModelState.ErrorCount == 0;
+        }
+        
+        #endregion
     }
 }
