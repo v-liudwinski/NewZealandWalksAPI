@@ -114,12 +114,13 @@ public class WalksController : ControllerBase
 
         return Ok(walkDTO);
     }
-
+    
+    
     #region Private Methods
 
     private async Task<bool> ValidateAddWalkAsync(AddWalkRequest addWalkRequest)
     {
-        if (addWalkRequest == null)
+        /*if (addWalkRequest == null)
         {
             ModelState.AddModelError(nameof(addWalkRequest), 
                 $"Walk is required!");
@@ -135,7 +136,7 @@ public class WalksController : ControllerBase
         {
             ModelState.AddModelError(nameof(addWalkRequest.Length), 
                 $"{nameof(addWalkRequest.Length)} could not be less than or equal to zero!");
-        }
+        }*/
 
         var region = await _regionRepository.GetAsync(addWalkRequest.RegionId);
         if (region is null)
@@ -158,7 +159,7 @@ public class WalksController : ControllerBase
     
     private async Task<bool> ValidateUpdateWalkAsync(UpdateWalkRequest updateWalkRequest)
     {
-        if (updateWalkRequest == null)
+        /*if (updateWalkRequest == null)
         {
             ModelState.AddModelError(nameof(updateWalkRequest), 
                 $"Walk is required!");
@@ -174,7 +175,7 @@ public class WalksController : ControllerBase
         {
             ModelState.AddModelError(nameof(updateWalkRequest.Length), 
                 $"{nameof(updateWalkRequest.Length)} could not be less than or equal to zero!");
-        }
+        }*/
 
         var region = await _regionRepository.GetAsync(updateWalkRequest.RegionId);
         if (region is null)
@@ -197,4 +198,5 @@ public class WalksController : ControllerBase
 
     
     #endregion
+    
 }

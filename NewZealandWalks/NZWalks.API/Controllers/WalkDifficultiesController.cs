@@ -46,11 +46,11 @@ public class WalkDifficultiesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> AddWalkDifficultyAsync(AddWalkDifficultyRequest addWalkDifficultyRequest)
     {
-        // Validation
+        /*// Validation
         if (!ValidateAddWalkDifficultyAsync(addWalkDifficultyRequest))
         {
             return BadRequest(ModelState);
-        }
+        }*/
         
         var walkDifficulty = new WalkDifficulty()
         {
@@ -69,11 +69,11 @@ public class WalkDifficultiesController : ControllerBase
     public async Task<IActionResult> UpdateWalkDifficultyAsync(Guid id, 
         UpdateWalkDifficultyRequest updateWalkDifficultyRequest)
     {
-        // Validation
+        /*// Validation
         if (!ValidateUpdateWalkDifficultyAsync(updateWalkDifficultyRequest))
         {
             return BadRequest(ModelState);
-        }
+        }*/
         
         var walkDifficulty = new WalkDifficulty()
         {
@@ -102,7 +102,8 @@ public class WalkDifficultiesController : ControllerBase
     }
 
     #region Private Methods
-
+    
+    /*
     private bool ValidateAddWalkDifficultyAsync(AddWalkDifficultyRequest addWalkDifficultyRequest)
     {
         if (addWalkDifficultyRequest is null)
@@ -136,6 +137,7 @@ public class WalkDifficultiesController : ControllerBase
         
         return ModelState.ErrorCount == 0;
     }
+    */
 
     #endregion
 }
